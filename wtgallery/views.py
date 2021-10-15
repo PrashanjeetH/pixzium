@@ -421,31 +421,29 @@ class SearchResultsView(ListView):
         st = self.request.GET.get('searchType')
         if st == 'image':
             object_list = Image.objects.filter(
-                Q(title__icontains=query) | Q(file__icontains=query) | Q(tags__name__icontains=query) & Q(status__exact='A'))
+                Q(title__icontains=query) | Q(file__icontains=query) | Q(tags__name__icontains=query) & Q(status__exact='A')).distinct()
             return object_list
 
         elif st == 'video':
             object_list = Video.objects.filter(
-                Q(title__icontains=query) | Q(file__icontains=query) | Q(tags__name__icontains=query))
+                Q(title__icontains=query) | Q(file__icontains=query) | Q(tags__name__icontains=query)).distinct()
             return object_list
 
         elif st == 'music':
             object_list = Music.objects.filter(
-                Q(title__icontains=query) | Q(file__icontains=query) | Q(tags__name__icontains=query))
-            print(object_list)
-            print(type(object_list))
+                Q(title__icontains=query) | Q(file__icontains=query) | Q(tags__name__icontains=query)).distinct()
             return object_list
 
         else:
             images = Image.objects.filter(
                 Q(title__icontains=query) | Q(file__icontains=query) | Q(
-                    tags__name__icontains=query))
+                    tags__name__icontains=query)).distinct()
             videos = Video.objects.filter(
                 Q(title__icontains=query) | Q(file__icontains=query) | Q(
-                    tags__name__icontains=query))
+                    tags__name__icontains=query)).distinct()
             musics = Music.objects.filter(
                 Q(title__icontains=query) | Q(file__icontains=query) | Q(
-                    tags__name__icontains=query))
+                    tags__name__icontains=query)).distinct()
             object_dict = {
                 'images':images,
                 'videos':videos,
