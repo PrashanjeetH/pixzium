@@ -126,14 +126,21 @@ WSGI_APPLICATION = 'pixzium.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config['DB_NAME'],  # Your AWS DB name
+#         'USER': config['DB_USERNAME'],  # Your AWS Username
+#         'PASSWORD': config['DB_PASSWORD'],  # Your AWS Password
+#         'HOST': 'pixziummain.cssgwjlhiewv.ap-south-1.rds.amazonaws.com',  # Your AWS Hostname
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config['DB_NAME'],  # Your AWS DB name
-        'USER': config['DB_USERNAME'],  # Your AWS Username
-        'PASSWORD': config['DB_PASSWORD'],  # Your AWS Password
-        'HOST': 'pixziummain.cssgwjlhiewv.ap-south-1.rds.amazonaws.com',  # Your AWS Hostname
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -210,16 +217,16 @@ AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 # AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 # AWS_S3_CLOUDFRONT_DOMAIN = 'd3gxnqjvuiz5a8.cloudfront.net'
-# AWS_S3_OBJECT_PARAMETERS = {
-#     'CacheControl': 'max-age=86400',
-# }
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
 # DEFAULT_FILE_STORAGE = 'pixzium.storage_backends.MediaStorage'
 
 
 
 # STATIC_URL = 'https://%s/%s/' % (AWS_S3_CLOUDFRONT_DOMAIN, AWS_LOCATION)
-# ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 # STATICFILES_FINDERS = (
 #     'django.contrib.staticfiles.finders.FileSystemFinder', 'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 # )
-# AWS_DEFAULT_ACL = None
+AWS_DEFAULT_ACL = None
